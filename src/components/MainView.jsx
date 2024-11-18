@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function MainView({ setView }) {
   const now = new Date();
-  const date = now.getDate() + 1; // 오늘 날짜 가져오기
+  const date = now.getDate(); // 오늘 날짜 가져오기
   const month = now.getMonth() + 1; // 오늘 달 가져오기
   const year = now.getFullYear(); // 올해 가져오기 fullyear = 2024 전체를 가져오겠다는 뜻
 
