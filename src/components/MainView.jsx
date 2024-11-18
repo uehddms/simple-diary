@@ -1,6 +1,7 @@
 import "./MainView.css";
+import PropTypes from "prop-types";
 
-function MainView() {
+function MainView({ setView }) {
   return (
     <>
       <div className="header">
@@ -9,8 +10,9 @@ function MainView() {
           <button
             className="history-btn"
             onClick={() => {
-              // HistoryView 화면으로 전환
-            }}>
+              setView("history");
+            }}
+          >
             기록 보기
           </button>
         </div>
@@ -28,3 +30,7 @@ function MainView() {
 }
 
 export default MainView;
+
+MainView.propTypes = {
+  setView: PropTypes.func,
+};

@@ -1,6 +1,7 @@
 import "./HistoryView.css";
+import PropTypes from "prop-types";
 
-function HistoryView() {
+function HistoryView({ setView }) {
   return (
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -8,7 +9,9 @@ function HistoryView() {
           className="back-btn"
           onClick={() => {
             // MainView 화면으로 전환
-          }}>
+            setView("main");
+          }}
+        >
           &lt;
         </button>
         <h4>다이어리 기록</h4>
