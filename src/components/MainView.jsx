@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
 function MainView({ setView }) {
-  const [questions, setQuestions] = useState(null);
   const now = new Date();
-
-  const date = now.getDate(); // 오늘 날짜 가져오기
+  const date = now.getDate() + 1; // 오늘 날짜 가져오기
   const month = now.getMonth() + 1; // 오늘 달 가져오기
   const year = now.getFullYear(); // 올해 가져오기 fullyear = 2024 전체를 가져오겠다는 뜻
+
+  const answers = JSON.parse(localStorage.getItem("diary") || "{}");
+
+  const [questions, setQuestions] = useState(null);
+  const [input, setInput] = useState(answers[date]);
 
   useEffect(() => {
     fetch(
@@ -20,6 +23,8 @@ function MainView({ setView }) {
         setQuestions(data);
       });
   }, []);
+
+  // console.log(input); //input 확인용 나중에 성능이 좋아지면 오류 발생할수도 .. but 지금은 상관 x
 
   // {question[date]} 처리 방법 2 - question[date]를 받아오는 동안 null 화면(아무것도 없는 화면)이 보이게 하기
   // if (!question[date]) {
@@ -50,8 +55,14 @@ function MainView({ setView }) {
       </div>
       <div className="content">
         <textarea
-          onChange={() => {
-            console.log("onChange");
+          value={input}
+          onChange={(e) => {
+            const value = e.target.value;
+            setInput(value);
+            window.localStorage.setItem(
+              "diary",
+              JSON.stringify({ ...answers, [date]: value }) //answers를 풀어서 넣어주면서 이전의 날짜도 저장되고, 오늘 날짜는 덮어써진다
+            );
           }}
         />
       </div>
