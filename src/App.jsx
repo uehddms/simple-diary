@@ -2,7 +2,7 @@ import "./App.css";
 import MainView from "./components/MainView";
 // eslint-disable-next-line no-unused-vars
 import HistoryView from "./components/HistoryView";
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 
 function App() {
   const [view, setView] = useState("main"); //"history"
